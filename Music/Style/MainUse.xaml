@@ -22,7 +22,6 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-
     
     <Style x:Key="PlayStyle" TargetType="{x:Type Image}">
         <Setter Property="Opacity" Value="0.7"/>        
@@ -35,9 +34,44 @@
         </Style.Triggers>
     </Style>
 
-
     <DataTemplate x:Key="TextRight">
         <TextBlock  Margin="8 0 0 0" Text="{Binding Path=Id, Mode=TwoWay}"  />
     </DataTemplate>
+
+    <Style x:Key="MusicTitle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontSize" Value="23"/>
+        <Setter Property="FontWeight" Value="Black"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Opacity" Value="0.7"/>
+        <Setter Property="Margin" Value="140 0 0 0"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Opacity" Value="1"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="LyrWord" TargetType="{x:Type TextBox}">
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontSize"  Value="22"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Height" Value="44"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" Width="Auto" Height="Auto" BorderThickness="0">
+                        <Grid x:Name="grid" Background="Transparent">
+                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 
 </ResourceDictionary>

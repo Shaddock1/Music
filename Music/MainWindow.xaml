@@ -34,12 +34,17 @@
 
         <!--主界面中间一行-->
         <Border  Grid.Row="1" BorderBrush="#FF14A44E" BorderThickness="2 0 2 0">           
-            <Grid>
+            <Grid ShowGridLines="True">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Images/20141105171738_MfYKS.jpeg"/>
+                </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="320"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <ListView x:Name="SongCollection" Style="{StaticResource MyListView}" ItemContainerStyle="{StaticResource MyListItem}" BorderThickness="0">
+
+                <Grid  Grid.Column="0">
+                <ListView Background="Transparent"  x:Name="SongCollection" Style="{StaticResource MyListView}" ItemContainerStyle="{StaticResource MyListItem}" BorderThickness="0">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn CellTemplate="{StaticResource TextRight}" Header="ID" Width="35"/>
@@ -48,7 +53,30 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </Grid>
+                </Grid>
+                
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition/>                                               
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Foreground="White" Style="{StaticResource MusicTitle}" Text="乐库" />
+                        <TextBlock Foreground="White" Style="{StaticResource MusicTitle}" Text="MV"  />
+                        <TextBlock Foreground="White" Style="{StaticResource MusicTitle}" Text="歌词"  />
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" >
+
+                        <Grid Margin="0 10 0 20" ClipToBounds="True">
+                            <StackPanel x:Name="LyrContent" Margin="0 200 0 0" HorizontalAlignment="Center">
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    
+                </Grid>
+
+                </Grid>
         </Border>
             
         <!--主界面最下面一行-->
@@ -67,8 +95,16 @@
                 </StackPanel>               
                 <!--播放进度-->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <Image Source="./Images/g.jpg" Height="55" Width="50"/>
-
+                 
+                    <Ellipse x:Name="SongImageEllipse" Height="54" Width="54" Stroke="Transparent">
+                        <Ellipse.Fill>
+                               <ImageBrush x:Name="SongImage" ImageSource="./Images/1212.jpg" />
+                        </Ellipse.Fill>
+                        <Ellipse.RenderTransform>
+                            <RotateTransform x:Name="ImageRotate"  CenterX="27" CenterY="27"/>
+                        </Ellipse.RenderTransform>
+                    </Ellipse>
+          
                     <Grid Margin="15,0,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*"/>
@@ -88,7 +124,6 @@
                     </Grid>
 
                 </StackPanel>
-
             </Grid>
         </Border>
     </Grid>

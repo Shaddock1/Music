@@ -26,7 +26,7 @@ namespace Music.MusicPush
             player.Open(new Uri(model.SongPath));
         }
 
-        public void PlayToggle(Timer timer,Stopwatch watch)
+        public void PlayToggle(Timer timer,Stopwatch watch,Action<int> action)
         {
             if (!IsPlaying)
             {
@@ -34,6 +34,7 @@ namespace Music.MusicPush
                     IsPlaying = true;
                     timer.Start();
                     watch.Start();
+                    action.Invoke(1);
             }
             else
             {
@@ -41,6 +42,7 @@ namespace Music.MusicPush
                 IsPlaying = false;
                 timer.Stop();
                 watch.Stop();
+                action.Invoke(2);
             }
 
         }
