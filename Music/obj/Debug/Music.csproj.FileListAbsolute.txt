@@ -17,3 +17,8 @@ F:\Visual File\Music\Music\obj\Debug\Music.csprojResolveAssemblyReference.cache
 F:\Visual File\Music\Music\obj\Debug\Interop.Shell32.dll
 F:\Visual File\Music\Music\obj\Debug\Music.csproj.ResolveComReference.cache
 F:\Visual File\Music\Music\bin\Debug\Interop.Shell32.dll
+H:\C#\Git\Music\Music\bin\Debug\Music.exe.config
+H:\C#\Git\Music\Music\obj\Debug\Interop.Shell32.dll
+H:\C#\Git\Music\Music\obj\Debug\Music.csproj.ResolveComReference.cache
+H:\C#\Git\Music\Music\obj\Debug\Music.exe
+H:\C#\Git\Music\Music\obj\Debug\Music.pdb
