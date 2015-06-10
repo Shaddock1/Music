@@ -46,7 +46,7 @@ namespace Music
         {
             InitializeComponent();
             InitTimer();
-            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\李易峰 - 剑伤.mp3");
+            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\123- 剑伤.mp3");
             this.TotalTime.Text = son.MusicTime;
             this.SongName.Text = son.Title + " — " + son.Artist;
             player = new MusicPlayer();
