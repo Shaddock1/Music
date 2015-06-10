@@ -52,6 +52,8 @@ namespace Music
             player = new MusicPlayer();
             player.Prepare(son);
             InitLyr();
+
+            int i = 01;
         }
 
         private void InitLyr()
