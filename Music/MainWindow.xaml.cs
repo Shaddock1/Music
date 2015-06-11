@@ -27,7 +27,7 @@ using System.Windows.Threading;
 
 namespace Music
 {
-    /// <summary>
+    /// <summary>a
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
@@ -40,6 +40,8 @@ namespace Music
         LrcPower power;
         Stopwatch watch;
         LoadImage image;
+        //托盘
+        private System.Windows.Forms.NotifyIcon icon;
 
         public MainWindow()
         {
@@ -52,6 +54,8 @@ namespace Music
             var tuple = new Tuple<Stopwatch, object, object, object, object, double>(watch, LyrContainer,PlayProcess, SongImageEllipse, NowTime, son.MusicSecond);
             this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\爱笑的眼睛.lrc", tuple);
 
+            InitText();
+            InitTray();
  }
 
         /// <summary>
@@ -128,6 +132,7 @@ namespace Music
             }
             else if ((sender as Image).Name == "CloseWindow")
             {
+                icon.Dispose();
                 Application.Current.Shutdown();
             }
         }
@@ -150,6 +155,80 @@ namespace Music
             }
             player.PlayToggle(timer, power,watch);
         }
+
+        #region 最小化到托盘
+        /// <summary>
+        /// 初始化托盘
+        /// </summary>
+        private void InitTray()
+        {
+            //设置托盘数据
+            icon = new System.Windows.Forms.NotifyIcon();
+            icon.BalloonTipText = "Hello，Music！";
+            icon.Text = "Music";
+            icon.Icon = new System.Drawing.Icon(@"../../Images/music.ico");
+            icon.Visible = true;
+            icon.ShowBalloonTip(1000);
+            icon.MouseClick += new System.Windows.Forms.MouseEventHandler(TrayMouseLeftClick);
+
+            //退出菜单项
+            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("退出Music");
+            exit.Click += new EventHandler(Exit);
+
+            //关联托盘控件
+            System.Windows.Forms.MenuItem[] children = new System.Windows.Forms.MenuItem[] { exit };
+            icon.ContextMenu = new System.Windows.Forms.ContextMenu(children);
+            this.StateChanged += new EventHandler(HideMinWindow);
+        }
+
+        /// <summary>
+        /// 窗体最小化时，隐藏窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HideMinWindow(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.Hide();
+            }
+        }
+
+        /// <summary>
+        /// 退出按钮
+        /// </summary>
+        private void Exit(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定退出Music吗？", "退出", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No) == MessageBoxResult.Yes)
+            {
+                icon.Dispose();
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
+
+        /// <summary>
+        /// 鼠标单击托盘图标
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void TrayMouseLeftClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                if (this.Visibility == Visibility.Visible)
+                {
+                    this.Hide();
+                }
+                else
+                {
+                    //this.Visibility=Visibility.Visible;
+                    this.Show();
+                    this.WindowState = WindowState.Normal;
+                    this.Activate();
+                }
+            }
+        }
+        #endregion
 
     }
 }
