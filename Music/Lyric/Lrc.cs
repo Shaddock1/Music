@@ -10,7 +10,6 @@ namespace Music.Lyric
 {
     internal class Lrc
     {
-
         public Lrc()
         {
             LrcWord = new Dictionary<double, string>();
@@ -50,7 +49,7 @@ namespace Music.Lyric
         {
             if (!File.Exists(lrcPath))
             {
-                return null;
+                throw new FileNotFoundException("文件"+lrcPath+"未找到");
             }
             Lrc lrc = new Lrc();
             string lrcFormat= lrcPath.Split('.').Last();

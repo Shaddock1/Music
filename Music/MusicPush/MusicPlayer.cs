@@ -1,4 +1,5 @@
-﻿using Music.Model;
+﻿using Music.Lyric;
+using Music.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,23 +27,25 @@ namespace Music.MusicPush
             player.Open(new Uri(model.SongPath));
         }
 
-        public void PlayToggle(Timer timer,Stopwatch watch,Action<int> action)
+        public void PlayToggle(Timer timer,LrcPower model,Stopwatch watch)
         {
             if (!IsPlaying)
             {
+                if (watch.IsRunning == false)
+                {
+                    watch.Start();
+                }
+                    timer.Start();
                     player.Play();
                     IsPlaying = true;
-                    timer.Start();
-                    watch.Start();
-                    action.Invoke(1);
             }
             else
             {
-                player.Pause();
-                IsPlaying = false;
-                timer.Stop();
                 watch.Stop();
-                action.Invoke(2);
+                   player.Pause();
+                   IsPlaying = false;
+                   timer.Stop();
+                   model.StopAnimate();
             }
 
         }

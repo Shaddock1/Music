@@ -53,25 +53,4 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="LyrWord" TargetType="{x:Type TextBox}">
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="FontSize"  Value="22"/>
-        <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Height" Value="44"/>
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" Width="Auto" Height="Auto" BorderThickness="0">
-                        <Grid x:Name="grid" Background="Transparent">
-                            <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                        </Grid>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
-
 </ResourceDictionary>
