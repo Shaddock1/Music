@@ -30,8 +30,8 @@ namespace Music.Lyric
         private SolidColorBrush beginBrush,endBrush;
         private Duration duration = new Duration(TimeSpan.FromSeconds(1));
 
-        public LrcPower(Stopwatch watch ,string lrcAddress, object lrcContainer,Tuple<object,object,object,double> tuple):
-        this(watch,Lrc.InitLrc(lrcAddress),lrcContainer,tuple)
+        public LrcPower(string lrcAddress, Tuple<Stopwatch,object,object,object,object,double> tuple):
+        this(Lrc.InitLrc(lrcAddress),tuple)
         {
         }
 
@@ -40,15 +40,15 @@ namespace Music.Lyric
         /// </summary>
         /// <param name="lrc"></param>
         /// <param name="lrcContainer"></param>
-        public LrcPower(Stopwatch wat,Lrc lrc, object lrcContainer,Tuple<object,object,object,double> tuple)
+        public LrcPower( Lrc lrc, Tuple<Stopwatch, object, object, object, object, double> tuple)
         {
             this.Lrc = lrc;
-            this.watch = wat;
-            this.LyrContainer = lrcContainer as StackPanel;
+            this.watch = tuple.Item1;
+            this.LyrContainer = tuple.Item2 as StackPanel;
             fontBegin = new DoubleAnimation(29, duration);
             fontEnd = new  DoubleAnimation(22, duration);
             tickAnimate = new ThicknessAnimation();
-            this.process = new PlayProcess(tuple.Item1,tuple.Item2,tuple.Item3,tuple.Item4);
+            this.process = new PlayProcess(tuple.Item3,tuple.Item4,tuple.Item5,tuple.Item6);
             AddLyc();
             InitColor();
         }
@@ -127,6 +127,7 @@ namespace Music.Lyric
         /// <param name="initContainerMarginTop"></param>
         public void Finaliz(double initContainerMarginTop)
         {
+            watch.Reset();
             LyrContainer.Children.Clear();
             LyrContainer.SetValue(FrameworkElement.MarginProperty,new Thickness(0,initContainerMarginTop,0,0));
             process.Finaliz();

@@ -43,24 +43,55 @@ namespace Music
         {
             InitializeComponent();
             InitTimer();
-            watch = new Stopwatch();
-            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\亲爱的那不是爱情.mp3");
+            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\李易峰 - 剑伤.mp3");
             this.TotalTime.Text = son.MusicTime;
-            player = new MusicPlayer();
             player.Prepare(son);
-            var tuple =new Tuple<object,object,object,double>(PlayProcess,SongImageEllipse,NowTime,son.MusicSecond);
-            this.power = new LrcPower(watch, @"C:\Users\Admin\Desktop\mp3\lyric\亲爱的那不是爱情.lrc", LyrContainer, tuple);
+            var tuple = new Tuple<Stopwatch, object, object, object, object, double>(watch, LyrContainer,PlayProcess, SongImageEllipse, NowTime, son.MusicSecond);
+            this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\剑伤.lrc", tuple);
+            InitText();
  }
 
         /// <summary>
-        /// 初始化定时器
+        /// 初始化
         /// </summary>
         private void InitTimer()
         {
             timer = new Timer();
             timer.Elapsed += new ElapsedEventHandler(TimerInvoke);
             timer.Interval = 500;
+
+            player = new MusicPlayer();
+            watch = new Stopwatch();
         }
+
+        /// <summary>
+        /// 初始化歌曲标题
+        /// </summary>
+        private void InitText()
+        {
+            if (son.Artist != "")
+            {
+                this.SongName.Text = son.Artist;
+            }
+            else
+            {
+                this.SongName.Text = power.Lrc.Artist;
+            }
+
+            this.SongName.Text += " — ";
+
+            if (son.Title != "")
+            {
+                this.SongName.Text += son.Title;
+            }
+            else
+            {
+                this.SongName.Text += power.Lrc.Title;
+            }
+
+        }
+
+
 
         private void TimerInvoke(object sender, ElapsedEventArgs e)
         {
@@ -115,7 +146,6 @@ namespace Music
             }
             player.PlayToggle(timer, power,watch);
         }
-
 
     }
 }
