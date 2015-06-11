@@ -43,11 +43,11 @@ namespace Music
         {
             InitializeComponent();
             InitTimer();
-            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\李易峰 - 剑伤.mp3");
+            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\一起摇摆.mp3");
             this.TotalTime.Text = son.MusicTime;
             player.Prepare(son);
             var tuple = new Tuple<Stopwatch, object, object, object, object, double>(watch, LyrContainer,PlayProcess, SongImageEllipse, NowTime, son.MusicSecond);
-            this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\剑伤.lrc", tuple);
+            this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\一起摇摆.lrc", tuple);
             InitText();
  }
 
