@@ -1,4 +1,6 @@
-*.suo 
+*.v11.suo
+*.v12.suo 
+*.v13.suo 
 [Ll]ogs/*
 [Ll]og/*
 [Bb]in/* 
