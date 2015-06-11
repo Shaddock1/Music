@@ -84,7 +84,6 @@ namespace Music.Process
             this.pbar.Value = 0;
             this.text.Text = "00:00";
             sb.Stop(ellipse);
-            (ellipse.RenderTransform as RotateTransform).Angle = 0;
         }
 
     }
