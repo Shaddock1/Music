@@ -26,17 +26,17 @@
                 </StackPanel>
 
                 <StackPanel  Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                    <Image x:Name="MinWindow" Style="{StaticResource CloseStyle}" Source="./Images/minSize.png" MouseDown="ChangeWindowState"/>
-                    <Image x:Name="CloseWindow" Style="{StaticResource CloseStyle}"  Source="./Images/close.png" MouseDown="ChangeWindowState"/>
+                    <Image x:Name="MinWindow" ToolTip="最小化" Style="{StaticResource CloseStyle}" Source="./Images/minSize.png" MouseDown="ChangeWindowState"/>
+                    <Image x:Name="CloseWindow" ToolTip="关闭" Style="{StaticResource CloseStyle}"  Source="./Images/close.png" MouseDown="ChangeWindowState"/>
                 </StackPanel>
             </Grid>
         </Border>
 
         <!--主界面中间一行-->
-        <Border  Grid.Row="1" BorderBrush="#FF14A44E" BorderThickness="2 0 2 0">           
-            <Grid ShowGridLines="True">
+        <Border Grid.Row="1" BorderBrush="#FF14A44E" BorderThickness="2 0 2 0">           
+            <Grid>
                 <Grid.Background>
-                    <ImageBrush ImageSource="Images/20141105171738_MfYKS.jpeg"/>
+                    <ImageBrush x:Name="LrcBack"/>
                 </Grid.Background>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="320"/>
@@ -54,7 +54,6 @@
                     </ListView.View>
                 </ListView>
                 </Grid>
-                
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="80"/>
@@ -65,7 +64,6 @@
                         <TextBlock Foreground="White" Style="{StaticResource MusicTitle}" Text="MV"  />
                         <TextBlock Foreground="White" Style="{StaticResource MusicTitle}" Text="歌词"  />
                     </StackPanel>
-
                     <Grid Grid.Row="1" >
                         <Grid  Margin="0 10 0 20" ClipToBounds="True">
                             <StackPanel x:Name="LyrContainer" Margin="0 220 0 0" HorizontalAlignment="Center">
@@ -98,7 +96,6 @@
                             </StackPanel>
                         </Grid>
                     </Grid>
-                    
                 </Grid>
 
                 </Grid>
@@ -114,15 +111,15 @@
                 </Grid.ColumnDefinitions>
                 <!--三个播放按钮-->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Style="{StaticResource PlayStyle}" Source="./Images/preview_on.png" />
-                    <Image Margin="10 0 10 0" Style="{StaticResource PlayStyle}" Source="./Images/play_on.png" MouseLeftButtonDown="PlayToggle"/>
-                    <Image Style="{StaticResource PlayStyle}" Source="./Images/next_on.png"/>
+                    <Image Style="{StaticResource PlayStyle}" Source="./Images/preview_on.png" ToolTip="上一首"/>
+                    <Image Margin="10 0 10 0" ToolTip="播放/暂停" Style="{StaticResource PlayStyle}" Source="./Images/play_on.png" MouseLeftButtonDown="PlayToggle"/>
+                    <Image Style="{StaticResource PlayStyle}" Source="./Images/next_on.png" ToolTip="下一首"/>
                 </StackPanel>               
                 <!--播放进度-->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <Ellipse x:Name="SongImageEllipse" Height="54" Width="54" Stroke="Transparent">
                         <Ellipse.Fill>
-                               <ImageBrush x:Name="SongImage" ImageSource="./Images/1212.jpg" />
+                               <ImageBrush x:Name="SongImage"/>
                         </Ellipse.Fill>
                         <Ellipse.RenderTransform>
                             <RotateTransform x:Name="ImageRotate"  CenterX="27" CenterY="27"/>

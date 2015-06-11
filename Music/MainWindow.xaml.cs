@@ -1,4 +1,5 @@
-﻿using Music.Lyric;
+﻿using Music.Load;
+using Music.Lyric;
 using Music.Model;
 using Music.MusicPush;
 using System;
@@ -38,17 +39,19 @@ namespace Music
         SongMessage son;
         LrcPower power;
         Stopwatch watch;
+        LoadImage image;
 
         public MainWindow()
         {
             InitializeComponent();
+            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\爱笑的眼睛.mp3");
+            InitText();
             InitTimer();
-            son = MusicCalc.GetSong(@"C:\Users\Admin\Desktop\mp3\一起摇摆.mp3");
             this.TotalTime.Text = son.MusicTime;
             player.Prepare(son);
             var tuple = new Tuple<Stopwatch, object, object, object, object, double>(watch, LyrContainer,PlayProcess, SongImageEllipse, NowTime, son.MusicSecond);
-            this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\一起摇摆.lrc", tuple);
-            InitText();
+            this.power = new LrcPower(@"C:\Users\Admin\Desktop\mp3\lyric\爱笑的眼睛.lrc", tuple);
+
  }
 
         /// <summary>
@@ -69,33 +72,34 @@ namespace Music
         /// </summary>
         private void InitText()
         {
+            string artist,title;
             if (son.Artist != "")
             {
-                this.SongName.Text = son.Artist;
+                artist = son.Artist;
             }
             else
             {
-                this.SongName.Text = power.Lrc.Artist;
+                artist = power.Lrc.Artist;
             }
-
-            this.SongName.Text += " — ";
-
             if (son.Title != "")
             {
-                this.SongName.Text += son.Title;
+                title = son.Title;
             }
             else
             {
-                this.SongName.Text += power.Lrc.Title;
+                title = power.Lrc.Title;
             }
 
+            this.SongName.Text = artist + " — " + title;
+            image =new LoadImage(artist);
+            image.SetImage(LrcBack, SongImage);
         }
 
 
 
         private void TimerInvoke(object sender, ElapsedEventArgs e)
         {
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(power.BeginAnimate));
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action<LoadImage>(power.BeginAnimate), image);
         }
 
         /// <summary>

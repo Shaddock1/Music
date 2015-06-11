@@ -54,6 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Load\LoadImage.cs" />
     <Compile Include="Lyric\Lrc.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -142,12 +143,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\pause_on.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1212.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\20141105171738_MfYKS.jpeg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

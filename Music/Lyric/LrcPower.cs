@@ -1,4 +1,5 @@
-﻿using Music.Process;
+﻿using Music.Load;
+using Music.Process;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -88,11 +89,12 @@ namespace Music.Lyric
         /// <summary>
         /// 开始动画
         /// </summary>
-        public void BeginAnimate()
+        public void BeginAnimate(LoadImage action)
         {
             if (process.UpdateProcess(watch.Elapsed.TotalSeconds))
             {
                 Finaliz(200);
+                action.Finaliz();
             }
             else
             {
